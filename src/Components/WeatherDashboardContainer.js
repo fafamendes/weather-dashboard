@@ -3,6 +3,10 @@ import React, { Component } from 'react';
 import Search from "./Search";
 import WeatherDashboard from "./WeatherDashboard";
 
+const styles = {
+    weatherDashboardContainer: {padding: "0 12%"},
+}
+
 export default class WeatherDashboardContainer extends Component {
 
   constructor(){
@@ -22,7 +26,7 @@ export default class WeatherDashboardContainer extends Component {
 
   render() {
     return (
-            <div>
+            <div style={styles.weatherDashboardContainer}>
                 <div>
                     <Search searchCallback={this.searchCallback.bind(this)}/>
                 </div>

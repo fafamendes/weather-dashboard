@@ -1,3 +1,4 @@
+import CountryCodes from "./CountryCodes";
 
 const weatherDescription = {
     "clear sky": "Céu limpo",
@@ -14,6 +15,14 @@ const weatherDescription = {
 const Utils = {
     translateConditions: (code) => {
         return weatherDescription[code];
+    },
+    getCountryCodeName: (code) => {
+        // eslint-disable-next-line 
+        return CountryCodes.map((value)=>{
+            if(value.code === code){
+                return value.name;
+            }
+        });
     },
 };
 

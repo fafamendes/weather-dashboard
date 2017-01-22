@@ -1,5 +1,16 @@
 import React, { Component } from 'react';
 
+import FlatButton from "material-ui/FlatButton";
+import getMuiTheme from "material-ui/styles/getMuiTheme";
+import baseTheme from "material-ui/styles/baseThemes/lightBaseTheme";
+import TextField from "material-ui/TextField";
+
+const styles = {
+  searchContent: {
+    textAlign: "center",
+  },
+}
+
 export default class InputText extends Component {
   search(ev){
     ev.preventDefault();
@@ -10,18 +21,29 @@ export default class InputText extends Component {
       this.search(ev);
     }
   }
+  getChildContext() {
+    return { muiTheme: getMuiTheme(baseTheme) };
+  }
   render() {
     return (
-            <div onKeyDown={this.handleKeyPress.bind(this)}>
-                <input type="text" id="city-name" placeholder="Digite o nome da cidade"/>
-                <button onClick={this.search.bind(this)}>Buscar</button>
+            <div style={styles.searchContent} onKeyDown={this.handleKeyPress.bind(this)}>
+                <TextField 
+                  id="city-name"
+                  hintText="Digite o nome da cidade" 
+                  floatingLabelText="Cidade"
+                />
+                <FlatButton
+                  label="Buscar"
+                  primary={true}
+                  onClick={this.search.bind(this)}
+                />
             </div>
         );
   }
-  
+
   getWeatherInfo() {
     let url = "http://api.openweathermap.org/data/2.5/weather?appid=698fc974aab6a529b81742dd467f37f5&q=" +
-    document.getElementById("city-name").value; 
+    document.getElementById("city-name").value;
     return fetch(url,  {
       method: 'GET',
       q: "simoes filho",
@@ -38,3 +60,7 @@ export default class InputText extends Component {
   }
 }
 
+
+InputText.childContextTypes = {
+  muiTheme: React.PropTypes.object.isRequired,
+};
